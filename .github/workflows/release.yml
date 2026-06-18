@@ -1,0 +1,25 @@
+name: Release Macro
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create archive of Macrodroid folder
+        run: |
+          zip -r Macrodroid.zip Macrodroid/
+
+      - name: Upload release asset
+        uses: softprops/action-gh-release@v1
+        with:
+          files: Macrodroid.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
