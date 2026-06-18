@@ -1,5 +1,7 @@
 # Remote Airplane Mode Reset
 
+![Android bar with Auto AirplaneMode](./docs/auto-airplanemode.gif)
+
 Este proyecto proporciona una forma de restablecer la conexión de red de su dispositivo Android (alternar el modo avión) de forma remota mediante una solicitud HTTP. Está construido alrededor de una macro de MacroDroid que ejecuta un servidor HTTP local en el puerto 8080. Cualquier cliente (por ejemplo, un navegador, curl o un widget de panel) puede enviar una solicitud GET a `http://<ip_del_dispositivo>:8080/plane` para activar la macro.
 
 ## Cómo funciona
