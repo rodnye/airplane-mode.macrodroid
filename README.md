@@ -33,11 +33,12 @@ La macro es autónoma y no requiere ninguna aplicación externa además de Macro
      - `MODIFY_PHONE_STATE`
      - `CHANGE_WIFI_STATE`
      - `CHANGE_NETWORK_STATE`
-       > [!note]
-       > Puede usar el script bash que se encuentra en `scripts/grant.sh` para mayor comodidad
 
-   - **Shizuku**  
-     Consulte esta [guía en video](https://www.youtube.com/watch?v=_WLbhtpC5ls) para usar Shizuku y conceder los mismos permisos.
+> [!note]
+> Puede usar el script bash que se encuentra en `scripts/grant.sh` para mayor comodidad
+
+- **Shizuku**  
+  Consulte esta [guía en video](https://www.youtube.com/watch?v=_WLbhtpC5ls) para usar Shizuku y conceder los mismos permisos.
 
 3. **Descargue el archivo de la macro**  
    Obtenga la última versión desde la página de [GitHub Releases](https://github.com/rodnye/airplane-mode.macrodroid/releases).  
@@ -92,62 +93,4 @@ Estos scripts están pensados para entornos de escritorio (por ejemplo, Linux co
 ---
 
 Para más detalles, visite el [repositorio de GitHub](https://github.com/rodnye/airplane-mode.macrodroid).
-Follow the guide: [ADB Hack – Granting extra capabilities](https://macrodroidforum.com/index.php?threads/adb-hack-granting-extra-capabilities-via-the-adb-tool.48)  
- Grant at least these permissions: - `WRITE_SECURE_SETTINGS` - `READ_EXTERNAL_STORAGE` - `WRITE_EXTERNAL_STORAGE` - `MODIFY_PHONE_STATE` - `CHANGE_WIFI_STATE` - `CHANGE_NETWORK_STATE`
 
-- **Shizuku**  
-  See this [video guide](https://www.youtube.com/watch?v=_WLbhtpC5ls) for using Shizuku to grant the same permissions.
-
-3. **Download the macro file**  
-   Get the latest release from the [GitHub Releases](https://github.com/rodnye/airplane-mode.macrodroid/releases) page.  
-   The archive contains a `.macro` file and optional audio assets.
-
-4. **Copy the macro to your device**  
-   Place the `.macro` file (and the `assets/` folder, if you want sounds) into the directory:  
-   `/sdcard/MacroDroid/`
-
-5. **Import the macro**  
-   Open MacroDroid, go to the **Macros** tab, tap the **+** (or **Import**) button, and select `Recuperar_conexión.macro`.  
-   The macro will appear in your list.
-
-That’s it! The macro is now active and will listen for HTTP requests.
-
-## Usage
-
-Once the macro is running, send an HTTP GET request to:
-
-```
-http://<your_device_ip>:8080/plane
-```
-
-You can use:
-
-- A web browser on the same network.
-- `curl` from another computer: `curl http://192.168.1.100:8080/plane`
-- The optional genmon widget (see below).
-
-The macro will respond with `OK` and perform the reset sequence.
-
-## Optional Components
-
-### Genmon Widget (XFCE panel)
-
-The `genmon/` folder contains a script (`statusbar.genmon.sh`) that can be used with the Genmon plugin in XFCE. It shows the current ping status and provides a clickable icon to send the reset signal.
-
-- The script displays the ping time to 8.8.8.8.
-- Clicking the icon runs `scripts/signal.service.sh`, which sends the HTTP request and updates the status.
-- It requires the helper scripts to be placed in `../scripts/` relative to the genmon script.
-
-### Helper Scripts
-
-The `scripts/` directory includes two bash scripts:
-
-- **ping.service.sh** – Runs continuously, pings 8.8.8.8 every second, and writes the result to `/dev/shm/ping_output.txt`. This is used by the genmon widget to display latency.
-
-- **signal.service.sh** – Sends the HTTP request to the macro using `curl`. It updates a status file (`/dev/shm/airplanemode_status.txt`) to show “sended” while the request is in progress and “ready” after completion. It also shows desktop notifications via `alert`.
-
-These scripts are meant for desktop environments (e.g., Linux with XFCE) and are not required for the macro to function.
-
----
-
-For more details, visit the [GitHub repository](https://github.com/rodnye/airplane-mode.macrodroid).
